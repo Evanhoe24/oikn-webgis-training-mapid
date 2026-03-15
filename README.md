@@ -4,26 +4,13 @@ An interactive web-based GIS application for visualizing and exploring crime inc
 
 ---
 
-## 📋 Table of Contents
-
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Architecture](#architecture)
-- [Getting Started](#getting-started)
-- [Project Structure](#project-structure)
-- [Data Sources](#data-sources)
-- [License](#license)
-
----
-
 ## ✨ Features
 
 - **Crime Incident Points** — Individual crime locations rendered as interactive map markers.
-- **Point Clustering** — Automatic clustering of nearby crime points with a blue-to-red gradient indicating cluster density.
+- **Point Clustering** — Automatic clustering of nearby crime points with a red-to-yellow gradient indicating cluster density.
 - **Police District & Beat Boundaries** — WMS raster overlays from GeoServer showing jurisdiction areas.
-- **Layer Management Panel** — Collapsible, glassmorphism-styled panel to toggle layers on/off.
-- **Feature Popups** — Hover over a crime point to see detailed information (case number, crime type, address, IUCR/FBI codes, date, etc.) in a beautifully formatted table popup.
-- **Floating Title Banner** — Centered pill-shaped title overlay at the top of the map.
+- **Layer Management Panel** — Collapsible panel to toggle layers on/off.
+- **Feature Popups** — Hover over a crime point to see detailed information (case number, crime type, address, IUCR/FBI codes, date, etc.) in a formatted table popup.
 
 ---
 
@@ -47,7 +34,7 @@ An interactive web-based GIS application for visualizing and exploring crime inc
 │                  Browser (Frontend)                │
 │  ┌──────────────┐  ┌────────────┐  ┌────────────┐  │
 │  │  MapLibre GL │  │  Controls  │  │   Popups   │  │
-│  │   (map view) │  │ (layers)   │  │ (details)  │  │
+│  │  (map view)  │  │  (layers)  │  │  (details) │  │
 │  └──────┬───────┘  └─────┬──────┘  └─────┬──────┘  │
 │         │                │               │         │
 │         └────────────────┼───────────────┘         │
@@ -55,14 +42,14 @@ An interactive web-based GIS application for visualizing and exploring crime inc
                            │ HTTP (WFS / WMS)
                            ▼
                   ┌─────────────────┐
-                  │   GeoServer     │
-                  │  (port 8081)    │
+                  │    GeoServer    │
+                  │   (port 8081)   │
                   └────────┬────────┘
                            │ SQL
                            ▼
                   ┌─────────────────┐
-                  │    PostGIS      │
-                  │  (port 5433)    │
+                  │     PostGIS     │
+                  │   (port 5433)   │
                   └─────────────────┘
 ```
 
@@ -89,6 +76,7 @@ This launches:
 ### 2. Install Frontend Dependencies
 
 ```bash
+# From the frontend folder
 cd frontend
 npm install
 ```
@@ -101,12 +89,37 @@ npm run dev
 
 The app will be available at **http://localhost:5173**.
 
-### 4. Build for Production
+---
+
+### ⚠️ Important Note — GeoServer PostGIS Credentials
+
+When configuring the PostGIS data store in GeoServer, always ensure that the database credentials match the PostgreSQL database credentials.
+
+By default, when cloning this repository, the GeoServer store configuration may still use the old username:
 
 ```bash
-npm run build
-npm run preview
+evan
 ```
+However, the PostgreSQL container in this project uses:
+
+```
+username: admin
+```
+
+If the credentials do not match, GeoServer will fail to connect to the PostGIS database, and the layers will not be available.
+
+
+**Correct Configuration Example**
+| Parameter    | Value        |
+| ------------ | ------------ |
+| **Host**     | localhost    |
+| **Port**     | 5432         |
+| **Database** | geodata      |
+| **Schema**   | crime        |
+| **User**     | admin        |
+| **Password** | admin        |
+
+Make sure the GeoServer PostGIS store uses the same username and password as defined in the PostgreSQL container configuration.
 
 ---
 
@@ -114,34 +127,33 @@ npm run preview
 
 ```
 oikn-webgis-training-mapid/
-├── docker-compose.yml          # PostGIS + GeoServer containers
-├── data/                       # Raw data files
-├── data_postgis/               # PostGIS data imports
-├── initdb/                     # Database initialization SQL scripts
-├── pgdata/                     # PostgreSQL data volume
-├── geoserver_data/             # GeoServer configuration & data
-└── frontend/                   # Vite web application
-    ├── index.html              # Entry HTML (map container)
-    ├── package.json            # Dependencies (maplibre-gl, vite)
-    ├── vite.config.js          # Vite configuration
-    └── src/
-        ├── main.js             # App entry point
-        ├── style.css           # Global & component styles
-        ├── assets/             # Static assets (logo, images)
-        ├── map/
-        │   └── createMap.js    # MapLibre map initialization
-        ├── sources/
-        │   ├── addSources.js   # GeoServer data sources (WFS/WMS)
-        │   └── addLayers.js    # Map layer definitions & styling
-        ├── controls/
-        │   ├── addControl.js   # Control registration
-        │   └── LayerManagerControl.js  # Toggle layers on/off
-        ├── events/
-        │   └── addMapEvents.js # Mouse/click event handlers
-        ├── handlers/
-        │   └── addHandlers.js  # Map interaction handlers
-        └── popup/
-            └── addPopup.js     # Crime info popup template
+├── data/                                # Geoserver configuration & data
+├── data_postgis/                        # PostGIS data imports 
+|   └── crimes.sql                       # Database initialization SQL scripts
+└── frontend/                            # Vite web application
+|   ├── index.html                       # Entry HTML (map container)
+|   ├── package.json                     # Dependencies (maplibre-gl, vite)
+|   ├── vite.config.js                   # Vite configuration
+|   └── src/
+|        ├── main.js                     # App entry point
+|        ├── style.css                   # Global & component styles
+|        ├── assets/                     # Static assets (logo, images)
+|        ├── map/
+|        │   └── createMap.js            # MapLibre map initialization
+|        ├── sources/
+|        │   ├── addSources.js           # GeoServer data sources (WFS/WMS)
+|        │   └── addLayers.js            # Map layer definitions & styling
+|        ├── controls/
+|        │   ├── addControl.js           # Control registration
+|        │   └── LayerManagerControl.js  # Toggle layers on/off
+|        ├── events/
+|        │   └── addMapEvents.js         # Mouse/click event handlers
+|        ├── handlers/
+|        │   └── addHandlers.js          # Map interaction handlers
+|        └── popup/
+|            └── addPopup.js             # Crime info popup template
+├── docker-compose.yml                   # PostGIS + GeoServer containers
+└── README.md
 ```
 
 ---
