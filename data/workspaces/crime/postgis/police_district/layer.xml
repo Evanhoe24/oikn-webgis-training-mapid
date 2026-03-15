@@ -1,0 +1,17 @@
+<layer>
+  <name>police_district</name>
+  <id>LayerInfoImpl-5854cb90:19c9a79abd8:-7ff5</id>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <id>StyleInfoImpl--5bca67a4:19cb68ef64d:-7ffb</id>
+  </defaultStyle>
+  <resource class="featureType">
+    <id>FeatureTypeInfoImpl-5854cb90:19c9a79abd8:-7ff6</id>
+  </resource>
+  <attribution>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+  <dateCreated>2026-02-26 15:14:06.377 UTC</dateCreated>
+  <dateModified>2026-03-04 03:05:37.283 UTC</dateModified>
+</layer>

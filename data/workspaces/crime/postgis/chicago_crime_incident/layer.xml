@@ -1,0 +1,17 @@
+<layer>
+  <name>chicago_crime_incident</name>
+  <id>LayerInfoImpl-5854cb90:19c9a79abd8:-7ffc</id>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <id>StyleInfoImpl--570ae188:124761b8d78:-7fdf</id>
+  </defaultStyle>
+  <resource class="featureType">
+    <id>FeatureTypeInfoImpl-5854cb90:19c9a79abd8:-7ffd</id>
+  </resource>
+  <attribution>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+  <dateCreated>2026-02-26 15:06:13.645 UTC</dateCreated>
+  <dateModified>2026-03-02 06:09:14.775 UTC</dateModified>
+</layer>

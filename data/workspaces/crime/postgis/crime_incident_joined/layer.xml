@@ -1,0 +1,16 @@
+<layer>
+  <name>crime_incident_joined</name>
+  <id>LayerInfoImpl-16a27af7:19cbc2b99f8:6a8a</id>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <id>StyleInfoImpl--570ae188:124761b8d78:-7fdf</id>
+  </defaultStyle>
+  <resource class="featureType">
+    <id>FeatureTypeInfoImpl-16a27af7:19cbc2b99f8:6a89</id>
+  </resource>
+  <attribution>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+  <dateCreated>2026-03-05 04:29:10.532 UTC</dateCreated>
+</layer>

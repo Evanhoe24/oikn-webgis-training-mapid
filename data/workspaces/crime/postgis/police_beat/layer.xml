@@ -1,0 +1,17 @@
+<layer>
+  <name>police_beat</name>
+  <id>LayerInfoImpl-5854cb90:19c9a79abd8:-7ff7</id>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <id>StyleInfoImpl--5bca67a4:19cb68ef64d:-7ffc</id>
+  </defaultStyle>
+  <resource class="featureType">
+    <id>FeatureTypeInfoImpl-5854cb90:19c9a79abd8:-7ff8</id>
+  </resource>
+  <attribution>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+  <dateCreated>2026-02-26 15:13:03.22 UTC</dateCreated>
+  <dateModified>2026-03-04 03:04:33.528 UTC</dateModified>
+</layer>

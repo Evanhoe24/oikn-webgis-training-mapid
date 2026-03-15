@@ -1,0 +1,31 @@
+services:
+  postgis:
+    image: postgis/postgis:16-3.4
+    container_name: postgis1
+    environment:
+      POSTGRES_DB: geodata
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: postgre123
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgis_db:/var/lib/postgresql/data
+      - ./data_postgis/crime.sql:/docker-entrypoint-initdb.d/crime.sql
+    restart: unless-stopped
+
+  geoserver:
+    image: docker.osgeo.org/geoserver:2.28.0
+    container_name: geoserver1
+    environment:
+      INSTALL_EXTENSIONS: true
+      STABLE_EXTENSIONS: vectortiles
+    ports:
+      - "8082:8080"
+    volumes:
+      - ./data:/opt/geoserver_data
+    depends_on:
+      - postgis
+    restart: unless-stopped
+
+volumes:
+  postgis_db:
